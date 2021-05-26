@@ -39,7 +39,6 @@ Co2 rotate(Co2 Coordinates, float theta){
 }
 
 void handle_sig(void){
-	printf("\033[?25h");
 	printf("bye\n");
 	exit(0);
 }
@@ -58,18 +57,28 @@ int main(void){
 	Co2 b = project(B);
 	Co2 c = project(C);
 	Co2 d = project(D);
+	int k = 0;
 	while(1){
+		++k;
 		signal(SIGINT, handle_sig);
 		printf("\033[2J");
 		printf("\033[H");
-		printf("\033[?25l");
-		usleep(200000);
+		usleep(20000);
 		theta += M_PI/180;
 		a = rotate(a, theta);
 		b = rotate(b, theta);
 		c = rotate(c, theta);
 		d = rotate(d, theta);
 		printf("a = (%f, %f), b = (%f, %f), c = (%f, %f), d = (%f, %f)\n\n\n", a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y);
+
+		for (int i = 0; i < 40; i++){
+			for (int j = 0; j < 20; j++){
+				printf("\033[%d;%dH", 10+i, 10+j+k);
+				printf(".");
+					
+			}
+			printf("\n") ;
+		}
 	}
 	return 0;
 }
