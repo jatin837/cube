@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#define SRC_WIDTH 75
+#define SRC_HEIGHT 30
+
 void rotate(float *x , float *y, float *z, float theta);
-void project(float *x , float *y, float *z, float theta);
+void project(float *x , float *y, float *z);
 // TESTING
 // --------
 // 	project function should take inputs and print '.' at projected x and projected y
@@ -19,7 +22,7 @@ int main(void){
 				y_temp = (float) y;
 				z_temp = (float) z;
 				rotate(&x_temp, &y_temp, &z_temp, theta);
-				project(&x_temp, &y_temp, &z_temp, theta);
+				project(&x_temp, &y_temp, &z_temp);
 			}
 		}
 		for (y = -10; y <= 10; y++){
@@ -30,7 +33,7 @@ int main(void){
 				z_temp = (float) z;
 
 				rotate(&x_temp, &y_temp, &z_temp, theta);
-				project(&x_temp, &y_temp, &z_temp, theta);
+				project(&x_temp, &y_temp, &z_temp);
 			}
 		}
 		for (x = -10; x <= 10; x++){
@@ -41,7 +44,7 @@ int main(void){
 				z_temp = (float) z;
 
 				rotate(&x_temp, &y_temp, &z_temp, theta);
-				project(&x_temp, &y_temp, &z_temp, theta);
+				project(&x_temp, &y_temp, &z_temp);
 			}
 		}
 		for (x = -10; x <= 10; x++){
@@ -52,7 +55,7 @@ int main(void){
 				z_temp = (float) z;
 
 				rotate(&x_temp, &y_temp, &z_temp, theta);
-				project(&x_temp, &y_temp, &z_temp, theta);
+				project(&x_temp, &y_temp, &z_temp);
 			}
 		}
 		for (x = -10; x <= 10; x++){
@@ -63,7 +66,7 @@ int main(void){
 				z_temp = (float) z;
 
 				rotate(&x_temp, &y_temp, &z_temp, theta);
-				project(&x_temp, &y_temp, &z_temp, theta);
+				project(&x_temp, &y_temp, &z_temp);
 			}
 		}
 		for (x = -10; x <= 10; x++){
@@ -74,7 +77,7 @@ int main(void){
 				z_temp = (float) z;
 
 				rotate(&x_temp, &y_temp, &z_temp, theta);
-				project(&x_temp, &y_temp, &z_temp, theta);
+				project(&x_temp, &y_temp, &z_temp);
 			}
 		}
 		theta += 1.0f;
