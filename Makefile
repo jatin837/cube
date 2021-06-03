@@ -6,3 +6,6 @@ main.o: main.c
 
 rotate.o: rotate.c
 	gcc -c -o rotate.o rotate.c -lm
+
+clean:
+	rm *.o out
