@@ -4,6 +4,7 @@
 #define SRC_WIDTH 75
 #define SRC_HEIGHT 30
 
+#define CUBE_SIZE 30
 void rotate(float *x , float *y, float *z, float theta);
 void project(float *x , float *y, float *z);
 // TESTING
@@ -11,8 +12,9 @@ void project(float *x , float *y, float *z);
 // 	project function should take inputs and print '.' at projected x and projected y
 //
 int main(void){
+	char O_SCR[SRC_WIDTH*SRC_HEIGHT];
+	memset(O_SCR, " ", SCR_WIDTH*SCR_HEIGHT);
 	float x, y, z, x_temp, y_temp, z_temp;
-	char output[100];
 	float theta = 0.0f;
 	while(1){
 		for (y = -10; y <= 10; y++){
