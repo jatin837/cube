@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-void project(float *x, float *y, float *z){
-	printf("\033[{%d};{%d}H", (int)*x, (int)*y);
-	printf(".");
+int project(float x, float y, float z){
+	x = x*z0/z;
+	y = y*z0/z;
+	return {x, y};
 }
