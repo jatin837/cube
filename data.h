@@ -3,7 +3,7 @@
 
 #define SCR_WIDTH 75
 #define SCR_HEIGHT 30
-#define CUBE_SIZE 50
+#define CUBE_SIZE 6
 
-int O_POINT = {-2, 0, 0};
+int O_POINT = {0, 0, 9};
 #endif

@@ -2,14 +2,10 @@
 #include <unistd.h>
 
 #include "data.h"
+#include "flatten.h"
+#include "rotate.h"
+#include "project.h"
 
-void rotate(float *x , float *y, float *z, float theta);
-void project(float *x , float *y, float *z);
-int flatten(int , int);
-// TESTING
-// --------
-// 	project function should take inputs and print '.' at projected x and projected y
-//
 int main(void){
 	char O_SCR[SRC_WIDTH*SRC_HEIGHT];
 	memset(O_SCR, " ", SCR_WIDTH*SCR_HEIGHT);
