@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define SRC_WIDTH 75
-#define SRC_HEIGHT 30
+#include "data.h"
 
-#define CUBE_SIZE 30
 void rotate(float *x , float *y, float *z, float theta);
 void project(float *x , float *y, float *z);
+int flatten(int , int);
 // TESTING
 // --------
 // 	project function should take inputs and print '.' at projected x and projected y
