@@ -1,8 +1,8 @@
-out: main.c
-	gcc -o out main.c -lm -Wimplicit-function-declaration -Wincompatible-pointer-types
+out: main.o
+	gcc -o out main.o rotate.o -lm 
 
-compile: main.c
-	gcc -c -o out main.c -lm
+main.o: main.c
+	gcc -c -o main.o main.c
 
-clean:
-	rm ./out
+rotate.o: rotate.c
+	gcc -c -o rotate.o rotate.c -lm
