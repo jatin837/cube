@@ -5,6 +5,8 @@ import math
 from math import cos, sin
 
 PI: float = math.pi
+SCR_WIDTH: int = 60
+SCR_HEIGHT: int = 24 
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
 
