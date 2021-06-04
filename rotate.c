@@ -1,3 +1,4 @@
+#include "data.h"
 #include <math.h>
 void rotate(float *X, float *Y, float *Z, float theta){
 	float x = *X, y = *Y, z = *Z;
