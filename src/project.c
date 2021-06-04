@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include "data.h" 
+#include "../headers/project.h"
 
 int* project(float x, float y, float z){
 	int *zo = (O_POINT + 2);

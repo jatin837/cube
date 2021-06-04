@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "data.h"
-#include "flatten.h"
-#include "rotate.h"
-#include "project.h"
+#include "headers/data.h"
+#include "headers/flatten.h"
+#include "headers/rotate.h"
+#include "headers/project.h"
 
 int main(void){
 

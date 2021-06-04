@@ -1,4 +1,4 @@
 #include "data.h"
 
-int project(float , float, float);
+int *project(float , float, float);
 
