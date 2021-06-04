@@ -1,4 +1,5 @@
 import numpy as np
+import signal
 from time import sleep
 import math
 from math import cos, sin
@@ -35,11 +36,16 @@ def Rz(v:np.array, theta:float):
     res = np.matmul(Rz_matrix, v)
     return res
 
-
+def handler(signum, frame):
+    print("\033[1J")
+    print('bye')
+    exit(1)
+    
 
 if __name__ == "__main__":
     v = np.array([1, 10, 0])
     while True:
+        signal.signal(signal.SIGINT, handler)
         sleep(0.1)
         v = Rz(Ry(Rx(v, 34), 34), 34)
         print(v)
