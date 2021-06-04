@@ -36,6 +36,9 @@ def Rz(v:np.array, theta:float):
     res = np.matmul(Rz_matrix, v)
     return res
 
+def Project(v:np.array):
+    pass
+
 def handler(signum, frame):
     print("\033[1J")
     print('bye')
