@@ -110,6 +110,7 @@ if __name__ == "__main__":
     r_pt = np.zeros(3)
 
     while True:
+        print('\033[H')
         signal.signal(signal.SIGINT, handler)
         sleep(0.1)
         cube = generate_cube(CUBE_SIZE)
@@ -122,7 +123,7 @@ if __name__ == "__main__":
             if k%SCR_WIDTH == 0:
                 print('\n')
             else:
-                print(O_SCR[k])
+                print(O_SCR[k], end = '')
 
          
         theta += 1.0
