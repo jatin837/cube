@@ -4,6 +4,7 @@ from time import sleep
 import math
 from math import cos, sin
 
+DELAY: float = 1e-9
 CUBE_SIZE:float = 6.0
 O_POINT: np.array = np.array([4, 4, 9])
 PI: float = math.pi
@@ -112,7 +113,7 @@ if __name__ == "__main__":
     while True:
         print('\033[H')
         signal.signal(signal.SIGINT, handler)
-        sleep(0.1)
+        sleep(DELAY)
         cube = generate_cube(CUBE_SIZE)
         for pt in cube:
             r_pt = Rz(Ry(Rx(pt[0], theta), theta), theta)
