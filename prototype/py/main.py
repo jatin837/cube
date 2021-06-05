@@ -5,45 +5,44 @@ import math
 from math import cos, sin
 
 CUBE_SIZE:float = 6.0
-OFSET:np.array = np.array([CUBE_SIZE/2+4, CUBE_SIZE/2 + 4, 0 ])
-O_POINT: np.array = np.array([OFSET[0], OFSET[1], 12])
+O_POINT: np.array = np.array([4, 4, 9])
 PI: float = math.pi
 SCR_WIDTH: int = 60
-SCR_HEIGHT: int = 24 
+SCR_HEIGHT: int = 28 
 LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
 O_SCR: list = [' ' for i in range(SCR_HEIGHT*SCR_WIDTH)]
 
-def generate_cube(CUBE_SIZE:float, OFSET:np.array):
+def generate_cube(CUBE_SIZE:float):
 
     CUBE: list = [] 
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
-            CUBE.append([np.array([x, y, z]) + OFSET,np.array([0, 0, -1])])
+            CUBE.append([np.array([x, y, z]), np.array([0, 0, -1])])
 
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append([np.array([x, y, z]) + OFSET, np.array([0, 0, 1])])
+            CUBE.append([np.array([x, y, z]), np.array([0, 0, 1])])
             
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
-            CUBE.append([np.array([x, z, y]) + OFSET, np.array([0, -1, 0])])
+            CUBE.append([np.array([x, z, y]), np.array([0, -1, 0])])
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append([np.array([x, z, y]) + OFSET, np.array([0, 1, 0])])
+            CUBE.append([np.array([x, z, y]), np.array([0, 1, 0])])
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
-            CUBE.append([np.array([z, y, x]) + OFSET, np.array([-1, 0, 0])])
+            CUBE.append([np.array([z, y, x]), np.array([-1, 0, 0])])
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append([np.array([z, y, x]) + OFSET, np.array([1, 0, 0])])
+            CUBE.append([np.array([z, y, x]), np.array([1, 0, 0])])
     return np.array(CUBE)
 
 
@@ -75,14 +74,16 @@ def Rz(v:np.array, theta:float):
     return res
 
 def Project(v:np.array):
-    k1:float = 10
-    k2:float = 10
+    K2:int = 5
+    K1:float = SCR_WIDTH*K2*3/(8*CUBE_SIZE);
     x = v[0]
     y = v[1]
     z = v[2]
+    xp: int = int(SCR_WIDTH/2 + K1*z*x);
+    yp: int = int(SCR_HEIGHT/2 - K1*z*y);
     res = np.ones(2)
-    res[0] = k1*x/(k2 + z)
-    res[1] = k1*y/(k2 + z)
+    res[0] = int(K1*x/(K2 + z))
+    res[1] = int(K1*y/(K2 + z))
     return res
 
 def Luminance_calc(v:np.array, O_POINT:np.array, surface_normal:np.array):
@@ -94,9 +95,14 @@ def handler(signum, frame):
     print('bye')
     exit(1)
     
-def flatten(x: int, y: int):
+def flatten(v:np.array):
     global SCR_WIDTH
-    return x + SCR_WIDTH * y
+    x = int(v[0])
+    y = int(v[1])
+    res = x + SCR_WIDTH * y
+    if (res >= SCR_WIDTH*SCR_HEIGHT):
+        print(f'overflow for {x}, {y} --> {res}')
+    return res
 
 
 if __name__ == "__main__":
@@ -106,13 +112,17 @@ if __name__ == "__main__":
     while True:
         signal.signal(signal.SIGINT, handler)
         sleep(0.1)
-        cube = generate_cube(CUBE_SIZE, OFSET)
-        print(cube)
+        cube = generate_cube(CUBE_SIZE)
         for pt in cube:
             r_pt = Rz(Ry(Rx(pt[0], theta), theta), theta)
             p_pt:np.array = Project(r_pt)
+            O_SCR[flatten(p_pt)] = '.'
             l = Luminance_calc(r_pt, O_POINT, pt[1])
-            print(p_pt)
+        for k in range(SCR_WIDTH*SCR_HEIGHT):
+            if k%SCR_WIDTH == 0:
+                print('\n')
+            else:
+                print(O_SCR[k])
 
+         
         theta += 1.0
-        print('-'*10)
