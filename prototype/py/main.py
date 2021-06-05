@@ -13,6 +13,7 @@ SCR_HEIGHT: int = 24
 LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
+O_SCR: list = [' ' for i in range(SCR_HEIGHT*SCR_WIDTH)]
 
 def generate_cube(CUBE_SIZE:float, OFSET:np.array):
 
