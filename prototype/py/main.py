@@ -21,31 +21,29 @@ def generate_cube(CUBE_SIZE:float, OFSET:np.array):
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
-            CUBE.append(np.array([x, y, z]) + OFSET)
-            print(CUBE)
+            CUBE.append([np.array([x, y, z]) + OFSET,np.array([0, 0, -1])])
 
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append(np.array([x, y, z]) + OFSET)
+            CUBE.append([np.array([x, y, z]) + OFSET, np.array([0, 0, 1])])
             
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
-            CUBE.append(np.array([x, z, y]) + OFSET)
+            CUBE.append([np.array([x, z, y]) + OFSET, np.array([0, -1, 0])])
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append(np.array([x, z, y]) + OFSET)
+            CUBE.append([np.array([x, z, y]) + OFSET, np.array([0, 1, 0])])
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
-            CUBE.append(np.array([z, y, x]) + OFSET)
+            CUBE.append([np.array([z, y, x]) + OFSET, np.array([-1, 0, 0])])
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append(np.array([z, y, x]) + OFSET)
-    print(CUBE)
+            CUBE.append([np.array([z, y, x]) + OFSET, np.array([1, 0, 0])])
     return np.array(CUBE)
 
 
@@ -100,8 +98,9 @@ if __name__ == "__main__":
         cube = generate_cube(CUBE_SIZE, OFSET)
         print(cube)
         for pt in cube:
-            r_pt = Rz(Ry(Rx(pt, theta), theta), theta)
-            print(r_pt, end = ' ')
+            r_pt = Rz(Ry(Rx(pt[0], theta), theta), theta)
+            l = Luminance_calc(r_pt, O_POINT, pt[1])
+            print(l)
 
         theta += 1.0
         print('-'*10)
