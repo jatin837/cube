@@ -94,10 +94,10 @@ def handler(signum, frame):
     print('bye')
     exit(1)
     
-def flatten(x: int, y: int){
+def flatten(x: int, y: int):
     global SCR_WIDTH
     return x + SCR_WIDTH * y
-}
+
 
 if __name__ == "__main__":
     theta:float = 1.0
@@ -110,8 +110,9 @@ if __name__ == "__main__":
         print(cube)
         for pt in cube:
             r_pt = Rz(Ry(Rx(pt[0], theta), theta), theta)
+            p_pt:np.array = Project(r_pt)
             l = Luminance_calc(r_pt, O_POINT, pt[1])
-            print(l)
+            print(p_pt)
 
         theta += 1.0
         print('-'*10)
