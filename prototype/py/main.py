@@ -87,6 +87,10 @@ def handler(signum, frame):
     print('bye')
     exit(1)
     
+def flatten(x: int, y: int){
+    global SCR_WIDTH
+    return x + SCR_WIDTH * y
+}
 
 if __name__ == "__main__":
     theta:float = 1.0
