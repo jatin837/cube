@@ -85,10 +85,10 @@ def Project(v:np.array):
     x = v[0]
     y = v[1]
     z = v[2]
-    k:float = SCR_DEPTH/(O_POINT[2] - z)
+    k:float = 1 
     res = np.ones(2)
-    res[0] = int(k*x)
-    res[1] = int(k*y)
+    res[0] = int(k*x/z)
+    res[1] = int(k*y/z)
     return res
 
 def luminance_calc(v:np.array, O_POINT:np.array, surface_normal:np.array):
@@ -120,7 +120,7 @@ if __name__ == "__main__":
         sleep(DELAY)
         cube = generate_cube(CUBE_SIZE)
         for pt in cube:
-            r_pt = Rz(Ry(Rx(pt[0], theta), theta), theta)
+            rt_pt = translate(Rz(Ry(Rx(pt[0], theta), theta), theta), OFSET)
             p_pt:np.array = Project(r_pt)
             O_SCR[flatten(p_pt)] = '.'
             l = luminance_calc(r_pt, O_POINT, pt[1])
