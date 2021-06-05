@@ -75,8 +75,15 @@ def Rz(v:np.array, theta:float):
     return res
 
 def Project(v:np.array):
-    # What should the projection logic?
-    pass
+    k1:float = 10
+    k2:float = 10
+    x = v[0]
+    y = v[1]
+    z = v[2]
+    res = np.ones(2)
+    res[0] = k1*x/(k2 + z)
+    res[1] = k1*y/(k2 + z)
+    return res
 
 def Luminance_calc(v:np.array, O_POINT:np.array, surface_normal:np.array):
     res = np.dot(O_POINT - v, surface_normal)
