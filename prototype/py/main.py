@@ -4,12 +4,14 @@ from time import sleep
 import math
 from math import cos, sin
 
-DELAY: float = 1e-9
+DELAY: float = 1e-19
+SCR_DEPTH: int = 15
 CUBE_SIZE:float = 6.0
-O_POINT: np.array = np.array([4, 4, 9])
+O_POINT: np.array = np.array([4, 4, 20])
 PI: float = math.pi
 SCR_WIDTH: int = 60
 SCR_HEIGHT: int = 28 
+OFSET: np.array = np.array([SCR_WIDTH, SCR_HEIGHT, 0])
 LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
@@ -46,6 +48,9 @@ def generate_cube(CUBE_SIZE:float):
             CUBE.append([np.array([z, y, x]), np.array([1, 0, 0])])
     return np.array(CUBE)
 
+def translate(v:np.array, t:np.array):
+    res = v + t;
+    return res 
 
 def Rx(v:np.array, theta:float): 
     Rx_matrix:np.array  = np.array([
@@ -75,19 +80,18 @@ def Rz(v:np.array, theta:float):
     return res
 
 def Project(v:np.array):
-    K2:int = 5
-    K1:float = SCR_WIDTH*K2*3/(8*CUBE_SIZE);
+    global SCR_DEPTH
+    global O_POINT
     x = v[0]
     y = v[1]
     z = v[2]
-    xp: int = int(SCR_WIDTH/2 + K1*z*x);
-    yp: int = int(SCR_HEIGHT/2 - K1*z*y);
+    k:float = SCR_DEPTH/(O_POINT[2] - z)
     res = np.ones(2)
-    res[0] = int(K1*x/(K2 + z))
-    res[1] = int(K1*y/(K2 + z))
+    res[0] = int(k*x)
+    res[1] = int(k*y)
     return res
 
-def Luminance_calc(v:np.array, O_POINT:np.array, surface_normal:np.array):
+def luminance_calc(v:np.array, O_POINT:np.array, surface_normal:np.array):
     res = np.dot(O_POINT - v, surface_normal)
     return res
 
@@ -119,12 +123,13 @@ if __name__ == "__main__":
             r_pt = Rz(Ry(Rx(pt[0], theta), theta), theta)
             p_pt:np.array = Project(r_pt)
             O_SCR[flatten(p_pt)] = '.'
-            l = Luminance_calc(r_pt, O_POINT, pt[1])
+            l = luminance_calc(r_pt, O_POINT, pt[1])
         for k in range(SCR_WIDTH*SCR_HEIGHT):
             if k%SCR_WIDTH == 0:
                 print('\n')
             else:
                 print(O_SCR[k], end = '')
 
+        O_SCR = [' ' for i in range(SCR_HEIGHT*SCR_WIDTH)]
          
         theta += 1.0
