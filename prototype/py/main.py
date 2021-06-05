@@ -14,6 +14,38 @@ LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
 
+def generate_cube(CUBE_SIZE:float, OFSET:np.array):
+
+    CUBE: list 
+    for x in range(CUBE_SIZE, 0.7):
+        for y in range(CUBE_SIZE, 0.7):
+            z = 0
+            CUBE.append(np.array([x, y, z]) + OFSET)
+
+    for x in range(CUBE_SIZE, 0.7):
+        for y in range(CUBE_SIZE, 0.7):
+            z = CUBE_SIZE
+            CUBE.append(np.array([x, y, z]) + OFSET)
+            
+    for x in range(CUBE_SIZE, 0.7):
+        for y in range(CUBE_SIZE, 0.7):
+            z = 0
+            CUBE.append(np.array([x, z, y]) + OFSET)
+    for x in range(CUBE_SIZE, 0.7):
+        for y in range(CUBE_SIZE, 0.7):
+            z = CUBE_SIZE
+            CUBE.append(np.array([x, z, y]) + OFSET)
+    for x in range(CUBE_SIZE, 0.7):
+        for y in range(CUBE_SIZE, 0.7):
+            z = 0
+            CUBE.append(np.array([z, y, x]) + OFSET)
+    for x in range(CUBE_SIZE, 0.7):
+        for y in range(CUBE_SIZE, 0.7):
+            z = CUBE_SIZE
+            CUBE.append(np.array([z, y, x]) + OFSET)
+
+    return np.array(CUBE)
+
 
 def Rx(v:np.array, theta:float): 
     Rx_matrix:np.array  = np.array([
