@@ -4,6 +4,9 @@ from time import sleep
 import math
 from math import cos, sin
 
+CUBE_SIZE:float = 6.0
+OFSET:np.array = np.array([CUBE_SIZE/2+4, CUBE_SIZE/2 + 4, 0 ])
+O_POINT: np.array = np.array([OFSET[0], OFSET[1], 12])
 PI: float = math.pi
 SCR_WIDTH: int = 60
 SCR_HEIGHT: int = 24 
@@ -40,7 +43,12 @@ def Rz(v:np.array, theta:float):
     return res
 
 def Project(v:np.array):
+    # What should the projection logic?
     pass
+
+def Luminance_calc(v:np.array, O_POINT:np.array, surface_normal:np.array):
+    res = np.dot(O_POINT - v, surface_normal)
+    return res
 
 def handler(signum, frame):
     print("\033[1J")
