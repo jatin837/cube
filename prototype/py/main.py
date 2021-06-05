@@ -16,34 +16,35 @@ sinD = lambda x : sin(x*PI/180)
 
 def generate_cube(CUBE_SIZE:float, OFSET:np.array):
 
-    CUBE: list 
-    for x in range(CUBE_SIZE, 0.7):
-        for y in range(CUBE_SIZE, 0.7):
+    CUBE: list = [] 
+    for x in np.arange(0, CUBE_SIZE, 0.7):
+        for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
             CUBE.append(np.array([x, y, z]) + OFSET)
+            print(CUBE)
 
-    for x in range(CUBE_SIZE, 0.7):
-        for y in range(CUBE_SIZE, 0.7):
+    for x in np.arange(0, CUBE_SIZE, 0.7):
+        for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
             CUBE.append(np.array([x, y, z]) + OFSET)
             
-    for x in range(CUBE_SIZE, 0.7):
-        for y in range(CUBE_SIZE, 0.7):
+    for x in np.arange(0, CUBE_SIZE, 0.7):
+        for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
             CUBE.append(np.array([x, z, y]) + OFSET)
-    for x in range(CUBE_SIZE, 0.7):
-        for y in range(CUBE_SIZE, 0.7):
+    for x in np.arange(0, CUBE_SIZE, 0.7):
+        for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
             CUBE.append(np.array([x, z, y]) + OFSET)
-    for x in range(CUBE_SIZE, 0.7):
-        for y in range(CUBE_SIZE, 0.7):
+    for x in np.arange(0, CUBE_SIZE, 0.7):
+        for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
             CUBE.append(np.array([z, y, x]) + OFSET)
-    for x in range(CUBE_SIZE, 0.7):
-        for y in range(CUBE_SIZE, 0.7):
+    for x in np.arange(0, CUBE_SIZE, 0.7):
+        for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
             CUBE.append(np.array([z, y, x]) + OFSET)
-
+    print(CUBE)
     return np.array(CUBE)
 
 
@@ -89,9 +90,17 @@ def handler(signum, frame):
     
 
 if __name__ == "__main__":
-    v = np.array([1, 10, 0])
+    theta:float = 1.0
+    r_pt = np.zeros(3)
+
     while True:
         signal.signal(signal.SIGINT, handler)
         sleep(0.1)
-        v = Rz(Ry(Rx(v, 34), 34), 34)
-        print(v)
+        cube = generate_cube(CUBE_SIZE, OFSET)
+        print(cube)
+        for pt in cube:
+            r_pt = Rz(Ry(Rx(pt, theta), theta), theta)
+            print(r_pt, end = ' ')
+
+        theta += 1.0
+        print('-'*10)

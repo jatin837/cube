@@ -2,4 +2,4 @@ out
 *.o
 ./obj/*
 *.swp
-
+**/__pyc*
