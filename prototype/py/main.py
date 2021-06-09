@@ -12,7 +12,7 @@ LIGHT_SRC: np.array = np.array([CUBE_SIZE + 1, CUBE_SIZE + 1, 20])
 PI: float = math.pi
 SCR_WIDTH: int = 60
 SCR_HEIGHT: int = 28 
-OFSET: np.array = np.array([SCR_WIDTH, SCR_HEIGHT, 0])
+OFSET: np.array = np.array([8, 8, 0])
 LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
@@ -121,7 +121,7 @@ def flatten(v:np.array):
 if __name__ == "__main__":
 
     theta:float = 1.0
-    r_pt = np.zeros(3)
+    r_pt: np.array = np.zeros(3)
 
     while True:
 
