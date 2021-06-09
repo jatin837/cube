@@ -6,9 +6,9 @@ from math import cos, sin
 
 ## CONSTANTS & VARIABLES DECLARATIONS
 
-DELAY: float = 1e-19
+DELAY: float = 1e-9
 SCR_DEPTH: int = 15 # from origin right?
-CUBE_SIZE:float = 6.0
+CUBE_SIZE:float = 12.0
 LIGHT_SRC: np.array = np.array([CUBE_SIZE + 1, CUBE_SIZE + 1, 20])   
 PI: float = math.pi
 SCR_WIDTH: int = 70
@@ -18,7 +18,7 @@ LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
 O_SCR: list = ['.' for i in range(SCR_HEIGHT*SCR_WIDTH)]
-O_POINT: np.array = np.array([SCR_WIDTH/2, SCR_HEIGHT/2, SCR_DEPTH + 4]) # 0.5*(3)^0.2
+O_POINT: np.array = np.array([SCR_WIDTH/2, SCR_HEIGHT/2, SCR_DEPTH + 16]) # 0.5*(3)^0.2
 
 ## GIVEN THE SIZE OF THE CUBE, Generate a cube
 def generate_cube(CUBE_SIZE:float):
