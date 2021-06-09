@@ -82,7 +82,7 @@ def Project(v:np.array):
     x = v[0]
     y = v[1]
     z = v[2]
-    k:float = (x - O_POINT[3])/O_POINT[3]
+    k:float = (z - O_POINT[2])/O_POINT[2]
     res = np.ones(2)
     if z != 0:
         res[0] = int(k*x/z)
