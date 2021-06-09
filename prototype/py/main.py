@@ -17,6 +17,7 @@ LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
 O_SCR: list = [' ' for i in range(SCR_HEIGHT*SCR_WIDTH)]
+O_POINT: np.array = np.array([CUBE_SIZE/2, CUBE_SIZE/2, 0])
 
 ## GIVEN THE SIZE OF THE CUBE, Generate a cube
 def generate_cube(CUBE_SIZE:float):
@@ -40,15 +41,15 @@ def generate_cube(CUBE_SIZE:float):
 
 # Every rotation i apply, will occure on origin, but translating those set of points is a better idea if you want a more robust startergy to project then onto 2D screen
 def translate(v:np.array, t:np.array):
-    res = v + t;
+    res = v + t
     return res 
 
 ################################################## ROTATION MATRICES ############################
 def Rx(v:np.array, theta:float): 
     Rx_matrix:np.array  = np.array([
-        [1, 0, 0],
+        [1,       0,         0       ],
         [0, cosD(theta), -sinD(theta)],
-        [0, sinD(theta), cosD(theta)]
+        [0, sinD(theta), cosD(theta) ]
      ])
     res = np.matmul(Rx_matrix, v)
     return res
@@ -83,8 +84,10 @@ def Project(v:np.array):
     z = v[2]
     k:float = 1 
     res = np.ones(2)
-    res[0] = int(k*x/z)
-    res[1] = int(k*y/z)
+    if z != 0:
+        res[0] = int(k*x/z)
+        res[1] = int(k*y/z)
+
     return res
 
 # Luminance is calculated by taking dot product of surface normal
@@ -112,16 +115,16 @@ def flatten(v:np.array):
     x = int(v[0])
     y = int(v[1])
     res = x + SCR_WIDTH * y
-    if (res >= SCR_WIDTH*SCR_HEIGHT):
-        print(f'overflow for {x}, {y} --> {res}')
     return res
 
 ## main function
 if __name__ == "__main__":
+
     theta:float = 1.0
     r_pt = np.zeros(3)
 
     while True:
+
         print('\033[H')
         signal.signal(signal.SIGINT, handler)
         sleep(DELAY)
