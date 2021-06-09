@@ -17,7 +17,7 @@ OFSET: np.array = np.array([SCR_WIDTH/2, SCR_HEIGHT/2, 0])
 LUMINANCE:str = ".,-~:;=!*#$@"
 cosD = lambda x : cos(x*PI/180) 
 sinD = lambda x : sin(x*PI/180) 
-O_SCR: list = ['.' for i in range(SCR_HEIGHT*SCR_WIDTH)]
+O_SCR: list = [' ' for i in range(SCR_HEIGHT*SCR_WIDTH)]
 O_POINT: np.array = np.array([SCR_WIDTH/2, SCR_HEIGHT/2, SCR_DEPTH + 16]) # 0.5*(3)^0.2
 
 ## GIVEN THE SIZE OF THE CUBE, Generate a cube
@@ -131,13 +131,13 @@ if __name__ == "__main__":
         for pt in cube:
             rt_pt = translate(Rz(Ry(Rx(pt, theta), theta), theta), OFSET)
             p_pt:np.array = Project(rt_pt)
-            O_SCR[flatten(p_pt)] = 'C'
+            O_SCR[flatten(p_pt)] = '.'
         for k in range(SCR_WIDTH*SCR_HEIGHT):
             if k%SCR_WIDTH == 0:
                 print('\n', end='')
             else:
                 print(O_SCR[k], end = '')
 
-        O_SCR = ['.' for i in range(SCR_HEIGHT*SCR_WIDTH)]
+        O_SCR = [' ' for i in range(SCR_HEIGHT*SCR_WIDTH)]
          
         theta += 1.0
