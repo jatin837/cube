@@ -26,28 +26,16 @@ def generate_cube(CUBE_SIZE:float):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = 0
             CUBE.append([np.array([x, y, z]), np.array([0, 0, -1])])
+            CUBE.append([np.array([x, z, y]), np.array([0, 0, -1])])
+            CUBE.append([np.array([z, y, x]), np.array([0, 0, -1])])
 
     for x in np.arange(0, CUBE_SIZE, 0.7):
         for y in np.arange(0, CUBE_SIZE, 0.7):
             z = CUBE_SIZE
-            CUBE.append([np.array([x, y, z]), np.array([0, 0, 1])])
-            
-    for x in np.arange(0, CUBE_SIZE, 0.7):
-        for y in np.arange(0, CUBE_SIZE, 0.7):
-            z = 0
-            CUBE.append([np.array([x, z, y]), np.array([0, -1, 0])])
-    for x in np.arange(0, CUBE_SIZE, 0.7):
-        for y in np.arange(0, CUBE_SIZE, 0.7):
-            z = CUBE_SIZE
-            CUBE.append([np.array([x, z, y]), np.array([0, 1, 0])])
-    for x in np.arange(0, CUBE_SIZE, 0.7):
-        for y in np.arange(0, CUBE_SIZE, 0.7):
-            z = 0
-            CUBE.append([np.array([z, y, x]), np.array([-1, 0, 0])])
-    for x in np.arange(0, CUBE_SIZE, 0.7):
-        for y in np.arange(0, CUBE_SIZE, 0.7):
-            z = CUBE_SIZE
-            CUBE.append([np.array([z, y, x]), np.array([1, 0, 0])])
+            CUBE.append([np.array([x, y, z]), np.array([0, 0, -1])])
+            CUBE.append([np.array([x, z, y]), np.array([0, 0, -1])])
+            CUBE.append([np.array([z, y, x]), np.array([0, 0, -1])])
+
     return np.array(CUBE)
 
 # Every rotation i apply, will occure on origin, but translating those set of points is a better idea if you want a more robust startergy to project then onto 2D screen
